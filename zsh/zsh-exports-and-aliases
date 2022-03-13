@@ -64,6 +64,8 @@ alias pi="$prefix -S"
 
 alias pr="$prefix -Runs"
 
+alias pss="pacman -Slq | fzf --preview 'pacman -Si {}' --layout=reverse"
+
 
 # Apt
 

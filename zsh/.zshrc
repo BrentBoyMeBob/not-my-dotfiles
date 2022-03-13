@@ -77,8 +77,8 @@ source ~/.config/zsh/zsh-plugins/fzf-tab/fzf-tab.plugin.zsh
 
 PCOLOR=$(echo $PCOLOR |  grep -o '[[:digit:]]*' | cut -c 4)
 
-prompt='%B%F{$PCOLOR}%2~% %F{sgr0}$(gitprompt) %B%F{$PCOLOR}  %b'
-RPROMPT='%F{sgr0}%n@%m%'
+prompt='%B%F{$PCOLOR}  %b%B%F{$PCOLOR}%2~% %F{sgr0}$(gitprompt)  '
+RPROMPT='| %T'
 
 fzf-git
 gitprompt
