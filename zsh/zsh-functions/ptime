@@ -1,17 +1,22 @@
-#!/bin/bash -ei
+#!/bin/bash
 
-COLS=$(tput cols)
-tput civis
-
-ptime() {
-  clear
-  date +"                      %H : %M" | toilet -w $COLS -k -f smblock        
-#  date +"   %A, %d %B" | toilet -w $COLS -f future -F gay 
-  stty -echo
-  sleep 60	
+function box_out()
+{
+  local s=("$@") b w
+  for l in "${s[@]}"; do
+    ((w<${#l})) && { b="$l"; w="${#l}"; }
+  done
+  tput setaf 3
+  echo " -${b//?/-}-
+| ${b//?/ } |"
+  for l in "${s[@]}"; do
+    printf '| %s%*s%s |\n' "$(tput setaf $PCOLOR)" "-$w" "$l" "$(tput setaf 3)"
+  done
+  echo "| ${b//?/ } |
+ -${b//?/-}-"
+  tput sgr 0
 }
 
-trap "tput cvvis & echo 'Exited.'" EXIT
+box_out "$(whoami)@$(hostname)" "$(date +%H:%M)" "$(date +%m/%d/%Y)"
 
-while true; do
-ptime; done
+
